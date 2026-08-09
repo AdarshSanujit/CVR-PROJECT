@@ -1,0 +1,328 @@
+/* =================================
+   SENIOR OTP VERIFICATION
+================================= */
+
+.otp-page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #f5f7ff 0%,
+    #eef2ff 100%
+  );
+
+  font-family: Arial, sans-serif;
+}
+
+
+/* =================================
+   OTP CARD
+================================= */
+
+.otp-card {
+  width: 100%;
+  max-width: 450px;
+
+  background: #ffffff;
+
+  padding: 45px 40px;
+
+  border-radius: 20px;
+
+  border: 1px solid #e3e7f0;
+
+  box-shadow:
+    0 20px 60px rgba(30, 50, 90, 0.15);
+
+  text-align: center;
+}
+
+
+/* =================================
+   LOGO
+================================= */
+
+.otp-logo {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background: #315bea;
+  color: #ffffff;
+
+  font-size: 28px;
+  font-weight: 800;
+}
+
+
+/* =================================
+   HEADING
+================================= */
+
+.otp-card h1 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 28px;
+  font-weight: 700;
+}
+
+
+/* =================================
+   DESCRIPTION
+================================= */
+
+.otp-subtitle {
+  margin: 12px auto 30px;
+
+  max-width: 340px;
+
+  color: #70798a;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =================================
+   OTP INPUTS
+================================= */
+
+.otp-inputs {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-bottom: 28px;
+}
+
+
+/* Individual OTP box */
+
+.otp-inputs input {
+  width: 48px;
+  height: 54px;
+
+  padding: 0;
+
+  border: 1px solid #d8deea;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #172033;
+
+  text-align: center;
+
+  font-size: 21px;
+  font-weight: 700;
+
+  outline: none;
+
+  transition: all 0.2s ease;
+}
+
+
+/* OTP focus */
+
+.otp-inputs input:focus {
+  border-color: #315bea;
+
+  box-shadow:
+    0 0 0 3px rgba(49, 91, 234, 0.12);
+}
+
+
+/* =================================
+   OTP ERROR
+================================= */
+
+.otp-error {
+  margin: -15px 0 18px;
+
+  color: #d64545;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+
+/* =================================
+   VERIFY BUTTON
+================================= */
+
+.verify-button {
+  width: 100%;
+  height: 48px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #315bea;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+
+.verify-button:hover {
+  background: #244bd1;
+
+  box-shadow:
+    0 8px 20px rgba(49, 91, 234, 0.2);
+
+  transform: translateY(-1px);
+}
+
+
+.verify-button:active {
+  transform: translateY(0);
+}
+
+
+/* =================================
+   RESEND OTP
+================================= */
+
+.resend-button {
+  margin-top: 18px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #315bea;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.resend-button:hover {
+  text-decoration: underline;
+}
+
+
+/* =================================
+   BACK TO LOGIN
+================================= */
+
+.otp-back {
+  display: block;
+
+  margin-top: 25px;
+
+  color: #70798a;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition: 0.2s ease;
+}
+
+
+.otp-back:hover {
+  color: #315bea;
+}
+
+
+/* =================================
+   MOBILE RESPONSIVE
+================================= */
+
+@media (max-width: 500px) {
+
+  .otp-page {
+    padding: 20px;
+  }
+
+
+  .otp-card {
+    padding: 35px 22px;
+
+    border-radius: 16px;
+  }
+
+
+  .otp-card h1 {
+    font-size: 25px;
+  }
+
+
+  .otp-subtitle {
+    font-size: 13px;
+  }
+
+
+  .otp-inputs {
+    gap: 6px;
+  }
+
+
+  .otp-inputs input {
+    width: 42px;
+    height: 50px;
+
+    font-size: 19px;
+  }
+
+}
+
+
+/* =================================
+   VERY SMALL MOBILE
+================================= */
+
+@media (max-width: 360px) {
+
+  .otp-card {
+    padding: 30px 15px;
+  }
+
+
+  .otp-inputs {
+    gap: 4px;
+  }
+
+
+  .otp-inputs input {
+    width: 38px;
+    height: 46px;
+  }
+
+}

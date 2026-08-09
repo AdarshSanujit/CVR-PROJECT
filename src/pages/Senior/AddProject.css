@@ -1,0 +1,583 @@
+.add-project-page {
+  min-height: 100vh;
+  padding: 50px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #f5f7ff 0%,
+    #eef2ff 100%
+  );
+
+  font-family: Arial, sans-serif;
+  color: #172033;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.add-project-header {
+  max-width: 850px;
+
+  margin: 0 auto 30px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+}
+
+.add-project-logo {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #315bea;
+
+  color: #ffffff;
+
+  border-radius: 15px;
+
+  font-size: 28px;
+  font-weight: 800;
+
+  flex-shrink: 0;
+}
+
+.add-project-header h1 {
+  margin: 0 0 6px;
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+  color: #172033;
+}
+
+.add-project-header p {
+  margin: 0;
+
+  color: #70798a;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.add-project-card {
+  width: 100%;
+
+  max-width: 850px;
+
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  border: 1px solid #e3e7f0;
+
+  box-shadow:
+    0 20px 60px rgba(30, 50, 90, 0.12);
+
+  box-sizing: border-box;
+}
+
+.add-project-card h2 {
+  margin: 0;
+
+  font-size: 23px;
+
+  color: #172033;
+}
+
+.form-description {
+  margin: 8px 0 30px;
+
+  color: #70798a;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #172033;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 13px 14px;
+
+  border: 1px solid #d8deea;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #172033;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.form-group input,
+.form-group select {
+  height: 48px;
+}
+
+.form-group textarea {
+  resize: vertical;
+
+  min-height: 130px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   INPUT FOCUS
+========================================= */
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #315bea;
+
+  box-shadow:
+    0 0 0 3px rgba(49, 91, 234, 0.12);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #a0a8b8;
+}
+
+
+/* =========================================
+   OPTIONAL LABEL
+========================================= */
+
+.optional {
+  display: inline-block;
+
+  margin-left: 7px;
+
+  padding: 3px 7px;
+
+  border-radius: 5px;
+
+  background: #f1f3f7;
+
+  color: #70798a;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================
+   HELP TEXT
+========================================= */
+
+.field-help {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #8992a3;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   TWO COLUMN FORM ROW
+========================================= */
+
+.form-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 20px;
+
+  align-items: start;
+}
+
+.form-row .form-group {
+  margin-bottom: 22px;
+}
+
+
+/* =========================================
+   FILE INPUT
+========================================= */
+
+.form-group input[type="file"] {
+  height: auto;
+
+  padding: 11px 12px;
+
+  cursor: pointer;
+
+  background: #fafbff;
+}
+
+.form-group input[type="file"]::file-selector-button {
+  margin-right: 12px;
+
+  padding: 8px 12px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #315bea;
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+  background: #244bd1;
+}
+
+
+/* =========================================
+   SELECTED FILE
+========================================= */
+
+.selected-file {
+  margin-top: 10px;
+
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  background: #ecfdf3;
+
+  border: 1px solid #bbf7d0;
+
+  color: #15803d;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.submit-project-button {
+  width: 100%;
+
+  height: 50px;
+
+  margin-top: 8px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #315bea;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.submit-project-button:hover {
+  background: #244bd1;
+
+  box-shadow:
+    0 8px 20px rgba(49, 91, 234, 0.22);
+
+  transform: translateY(-1px);
+}
+
+.submit-project-button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   SUCCESS MESSAGE
+========================================= */
+
+.success-message {
+  margin-top: 20px;
+
+  padding: 15px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  border-radius: 10px;
+
+  background: #ecfdf3;
+
+  color: #15803d;
+
+  border: 1px solid #bbf7d0;
+
+  font-size: 14px;
+}
+
+.success-message > span {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.success-message strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  font-size: 14px;
+}
+
+.success-message p {
+  margin: 0;
+
+  color: #15803d;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   INFORMATION NOTE
+========================================= */
+
+.project-note {
+  max-width: 850px;
+
+  margin: 22px auto 0;
+
+  padding: 18px 22px;
+
+  background: #ffffff;
+
+  border-radius: 12px;
+
+  border: 1px solid #e3e7f0;
+
+  box-sizing: border-box;
+}
+
+.project-note strong {
+  font-size: 14px;
+
+  color: #172033;
+}
+
+.project-note p {
+  margin: 7px 0 0;
+
+  color: #70798a;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   HOVER EFFECT
+========================================= */
+
+.add-project-card {
+  transition: box-shadow 0.2s ease;
+}
+
+.add-project-card:hover {
+  box-shadow:
+    0 24px 65px rgba(30, 50, 90, 0.14);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .add-project-page {
+    padding: 30px 15px;
+  }
+
+  .add-project-header {
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+
+  .add-project-logo {
+    width: 50px;
+    height: 50px;
+
+    font-size: 24px;
+
+    border-radius: 13px;
+  }
+
+  .add-project-header h1 {
+    font-size: 24px;
+  }
+
+  .add-project-header p {
+    font-size: 13px;
+  }
+
+  .add-project-card {
+    padding: 28px 20px;
+
+    border-radius: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+  .add-project-page {
+    padding: 25px 12px;
+  }
+
+  .add-project-header {
+    flex-direction: column;
+
+    text-align: center;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+  }
+
+  .add-project-header p {
+    max-width: 300px;
+  }
+
+  .add-project-card {
+    padding: 25px 17px;
+  }
+
+  .add-project-card h2 {
+    font-size: 21px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 46px;
+  }
+
+  .submit-project-button {
+    height: 48px;
+  }
+
+  .project-note {
+    padding: 15px 17px;
+  }
+
+}

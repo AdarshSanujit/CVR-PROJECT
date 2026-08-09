@@ -1,0 +1,523 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #f7f9fc;
+  color: #172033;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  height: 78px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-bottom: 1px solid #e8ebf1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #315bea;
+  color: white;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.logo h2 {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.logo span {
+  font-size: 11px;
+  color: #7b8495;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+}
+
+.nav-links a {
+  color: #586174;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #315bea;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 650px;
+  padding: 75px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  background:
+    radial-gradient(circle at 85% 30%, #e6edff 0, transparent 32%),
+    #f7f9fc;
+}
+
+.hero-content {
+  max-width: 620px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 9px 15px;
+  border-radius: 30px;
+  background: #e9efff;
+  color: #315bea;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: 58px;
+  line-height: 1.08;
+  letter-spacing: -2px;
+  margin-bottom: 25px;
+}
+
+.hero h1 span {
+  color: #315bea;
+}
+
+.hero p {
+  color: #667085;
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 570px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 32px;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 14px 22px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.primary-button {
+  border: none;
+  background: #315bea;
+  color: white;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(49, 91, 234, 0.25);
+}
+
+.secondary-button {
+  background: white;
+  color: #315bea;
+  border: 1px solid #d5dcf0;
+}
+
+.secondary-button:hover {
+  background: #f0f4ff;
+}
+
+/* =========================
+   HERO VISUAL
+========================= */
+
+.hero-visual {
+  position: relative;
+  width: 450px;
+  height: 390px;
+}
+
+.visual-card {
+  background: white;
+  border: 1px solid #e6e9ef;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(30, 50, 90, 0.12);
+}
+
+.main-card {
+  width: 350px;
+  padding: 27px;
+  position: absolute;
+  top: 35px;
+  left: 45px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-icon {
+  font-size: 30px;
+}
+
+.verified {
+  font-size: 11px;
+  color: #17834d;
+  background: #e7f8ee;
+  padding: 6px 9px;
+  border-radius: 20px;
+}
+
+.main-card h3 {
+  margin-top: 22px;
+  font-size: 21px;
+}
+
+.main-card p {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #778195;
+}
+
+.tech-tags {
+  display: flex;
+  gap: 7px;
+  margin-top: 20px;
+}
+
+.tech-tags span {
+  background: #f0f3f9;
+  color: #596377;
+  padding: 6px 9px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.card-author {
+  border-top: 1px solid #edf0f4;
+  margin-top: 23px;
+  padding-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #315bea;
+  color: white;
+  font-weight: 700;
+}
+
+.card-author strong {
+  display: block;
+  font-size: 12px;
+}
+
+.card-author small {
+  color: #8a92a1;
+  font-size: 10px;
+}
+
+.floating-card {
+  position: absolute;
+  background: white;
+  border: 1px solid #e5e9f0;
+  box-shadow: 0 12px 35px rgba(30, 50, 90, 0.12);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 12px;
+}
+
+.floating-card strong {
+  margin-left: 5px;
+}
+
+.floating-card small {
+  display: block;
+  color: #8a92a1;
+  margin-top: 4px;
+  margin-left: 25px;
+}
+
+.card-one {
+  top: 5px;
+  right: 5px;
+}
+
+.card-two {
+  bottom: 20px;
+  left: 0;
+}
+
+/* =========================
+   ROLES
+========================= */
+
+.roles {
+  padding: 90px 7%;
+  background: white;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-heading span,
+.section-label {
+  color: #315bea;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+  margin-top: 10px;
+  font-size: 38px;
+}
+
+.section-heading p {
+  margin-top: 10px;
+  color: #7a8495;
+}
+
+.role-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1150px;
+  margin: auto;
+}
+
+.role-card {
+  padding: 32px;
+  border: 1px solid #e7eaf0;
+  border-radius: 17px;
+  transition: 0.25s;
+  background: #fff;
+}
+
+.role-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 20px 45px rgba(30, 50, 90, 0.1);
+}
+
+.role-icon {
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+
+.role-label {
+  font-size: 11px;
+  color: #315bea;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.role-card h3 {
+  font-size: 23px;
+  margin-top: 10px;
+}
+
+.role-card p {
+  color: #717b8d;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+.role-card ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.role-card li {
+  color: #555f71;
+  font-size: 13px;
+  margin: 10px 0;
+}
+
+.role-button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px;
+  margin-top: 22px;
+  border: none;
+  border-radius: 8px;
+  background: #315bea;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.role-button:hover {
+  background: #244bd1;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+  padding: 90px 10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  background: #f7f9fc;
+}
+
+.about h2 {
+  font-size: 39px;
+  line-height: 1.2;
+  margin-top: 12px;
+}
+
+.about p {
+  color: #687386;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 35px 7%;
+  background: #121a2b;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer h3 {
+  font-size: 18px;
+}
+
+footer p {
+  color: #9ca6b8;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero p {
+    margin: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    transform: scale(0.9);
+  }
+
+  .role-container {
+    grid-template-columns: 1fr;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .navbar {
+    padding: 0 5%;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding: 55px 5%;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .hero-visual {
+    transform: scale(0.75);
+    margin-left: -50px;
+  }
+
+  .roles {
+    padding: 65px 5%;
+  }
+
+  .about {
+    padding: 65px 5%;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+}
