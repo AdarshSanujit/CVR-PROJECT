@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-role: {
+    role: {
       enum: ["senior", "junior", "admin"],
       type: String,
       required: true,
@@ -62,7 +62,7 @@ role: {
         return this.role === "senior";
       },
     },
-    
+
     companyName: {
       type: String,
       required: function () {
@@ -81,10 +81,18 @@ role: {
     bio: {
       type: String,
     },
-
+    profile_picture: {
+      type: String,
+    },
     location: {
       type: String,
     },
+    projects: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Project",
+      },
+    ],
   },
   {
     timestamps: true,

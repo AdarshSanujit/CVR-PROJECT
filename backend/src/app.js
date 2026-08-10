@@ -3,6 +3,8 @@ import cookieParser from 'cookie-parser';
 import connectDB from './db/db.js';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.route.js';
+import projectRoutes from './routes/project.route.js';
+
 dotenv.config();
 
 
@@ -21,5 +23,14 @@ app.get('/', (req, res) => {
   });
 });
 app.use('/api/auth', authRoutes);
+app.use('/api/project', projectRoutes);
+
+app.use((req, res, next) => {
+  return res.status(500).json({
+    success: false,
+    message: 'Internal Server Error',
+  });
+});
+
 
 export default app;
