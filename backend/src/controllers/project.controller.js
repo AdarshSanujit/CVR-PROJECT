@@ -201,4 +201,76 @@ const deleteProject = async (req, res) => {
     });
   }
 };
-export default { addProject, updateProject, deleteProject };
+async function getAllProjects(req, res) {
+  try {
+    const { user } = req;
+    if (!user) {
+      return res.success(403).json({
+        success: false,
+        message: "Please Login First",
+      });
+    }
+    const projects = await Project.find({ senior_profile_id: user.id });
+    if (!projects) {
+      return res.status(400).json({
+        success: false,
+        message:"No Project Found"
+      })
+    }
+    return res.status(200).json({
+      success: false,
+      message: "Projects Fetched Successfully",
+      projects
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+}
+async function getProjectById(req, res) {
+  try {
+    const { user } = req;
+    if (!user) {
+      return res.success(403).json({
+        success: false,
+        message: "Please Login First",
+      });
+    }
+    const { id } = req.params;
+    if (!id) {
+      return res.success(400).json({
+        success: false,
+        message: "Please Provide Project ID",
+      });
+    }
+    
+    const project = await Project.findById(id);
+    if (!project) { 
+      return res.status(400).json({
+        success: false,
+        message:"Project Not Found"
+      })
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Project Fetched Successfully",
+      project
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+}
+export default {
+  addProject,
+  updateProject,
+  deleteProject,
+  getProjectById,
+  getAllProjects,
+};

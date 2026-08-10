@@ -1,11 +1,16 @@
 import express from "express";
 import projectController from "../controllers/project.controller.js";
-import  authMiddleware from '../middlewares/auth.middleware.js';
+import authMiddleware from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
 
-router.post("/add-project", authMiddleware.verifyUser,upload.single("image"), projectController.addProject);
+router.post(
+  "/add-project",
+  authMiddleware.verifyUser,
+  upload.single("image"),
+  projectController.addProject,
+);
 router.put(
   "/update-project/:projectId",
   authMiddleware.verifyUser,
@@ -16,6 +21,16 @@ router.delete(
   "/delete-project/:projectId",
   authMiddleware.verifyUser,
   projectController.deleteProject,
+);
+router.get(
+  "/get-project/:id",
+  authMiddleware.verifyUser,
+  projectController.getProjectById,
+);
+router.get(
+  "/get-projects",
+  authMiddleware.verifyUser,
+  projectController.getAllProjects,
 );
 
 export default router;

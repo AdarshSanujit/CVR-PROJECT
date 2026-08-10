@@ -333,42 +333,7 @@ async function deleteProfile(req, res) {
     });
   }
 }
-async function getAllProjects(req, res) {
-  try {
-    
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      error: error.message,
-    });
-  }
-}
-async function getProjectById(req, res) {
-  try {
-    const { user } = req;
-    if (!user) { 
-      return res.success(403).json({
-        success: false,
-        message:"Please Login First"
-      })
-    }
-    const { id } = req.params;
-    if (!id) { 
-      return res.success(400).json({
-        success: false,
-        message: "Please Provide Valid ID",
-      });
-    }
-    
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      error: error.message,
-    });
-  }
-}
+
 export default {
   register,
   login,
@@ -377,6 +342,4 @@ export default {
   logout,
   updateProfile,
   deleteProfile,
-  getProjectById,
-  getAllProjects,
 };
