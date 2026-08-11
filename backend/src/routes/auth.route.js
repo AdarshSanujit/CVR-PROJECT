@@ -12,5 +12,6 @@ router.put('/update-profile', authMiddleware.verifyUser, upload.single("image"),
 router.get("/user/:id", authMiddleware.verifyUser, authController.getUserById); 
 router.get('/get-me',authMiddleware.verifyUser,authController.getMe) 
 router.delete('/delete/:id',authMiddleware.verifyUser,authController.deleteProfile) 
+router.get('/get-users',authMiddleware.verifyUser,authController.getAllUsers) 
 
 export default router;

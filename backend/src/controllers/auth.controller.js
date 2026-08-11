@@ -333,6 +333,38 @@ async function deleteProfile(req, res) {
     });
   }
 }
+async function getAllUsers(req,res) {
+  try {
+    const { user } = req;
+    if (!user) { 
+      return res.status(401).json({
+        success: false,
+        message: "Please Login First",
+      });
+    }
+    const users = await User.find({
+         _id: { $ne: user.id } ,
+        role: {$ne : "admin"}
+    }).select("-password");
+    if (!users) { 
+      return res.status(400).json({
+        success: false,
+        message: "No Users Found",
+      });
+    }
+    return res.status(200).json({
+      success: false,
+      message: "users fetched successfully",
+      users
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+}
 
 export default {
   register,
@@ -342,4 +374,5 @@ export default {
   logout,
   updateProfile,
   deleteProfile,
+  getAllUsers
 };
