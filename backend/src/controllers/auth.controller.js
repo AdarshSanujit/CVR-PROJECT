@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import { generateToken, verifyToken } from "../utils/token.js";
+import { generateToken } from "../utils/token.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 async function register(req, res) {
   try {
@@ -347,13 +347,13 @@ async function getAllUsers(req,res) {
         role: {$ne : "admin"}
     }).select("-password");
     if (!users) { 
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "No Users Found",
       });
     }
     return res.status(200).json({
-      success: false,
+      success: true,
       message: "users fetched successfully",
       users
     });
