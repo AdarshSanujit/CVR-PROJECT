@@ -125,7 +125,7 @@ const updateProject = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Project added successfully",
+      message: "Project updated successfully",
       project:updatedProject,
     });
   } catch (error) {
@@ -180,19 +180,18 @@ const deleteProject = async (req, res) => {
       senior_profile_id: user.id,
     });
 
-    if (project) {
-      return res.status(200).json({
-        success: true,
-        message:"Project deleted successfully"
-      })
-    }
     if (!project) {
-      return res.status(200).json({
+      return res.status(400).json({
         success: true,
         message: "you don't have access to do that",
       });
     }
-    console.log(project);
+   
+    return res.status(200).json({
+      success: true,
+      message:"Project deleted successfully"
+    })
+    
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -212,13 +211,13 @@ async function getAllProjects(req, res) {
     }
     const projects = await Project.find({ senior_profile_id: user.id });
     if (!projects) {
-      return res.status(400).json({
-        success: false,
-        message:"No Project Found"
+      return res.status(200).json({
+        success: true,
+        message:"No Project Created Yet"
       })
     }
     return res.status(200).json({
-      success: false,
+      success: true,
       message: "Projects Fetched Successfully",
       projects
     })

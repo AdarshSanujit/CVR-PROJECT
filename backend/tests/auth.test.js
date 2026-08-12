@@ -3,9 +3,10 @@ import request from "supertest";
 import mongoose from "mongoose";
 import connectDB from "../src/db/db.js";
 
-const agent = request.agent(app);
+export const agent = request.agent(app);
+export let testEmail;
+export let id;
 
-let testEmail;
 
 beforeAll(async () => {
   await connectDB();
@@ -15,7 +16,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await mongoose.connection.close();
 });
-let id;
 
 describe("POST /api/auth/register", () => {
   test("should return register user successfully", async () => {
@@ -78,7 +78,6 @@ describe("PUT /api/auth/update-profile", () => {
 describe("GET /api/auth/get-users", () => {
   test("should return  users fetched successfully", async () => {
     const response = await agent.get("/api/auth/get-users");
-    console.log(response.body)
     expect(response.statusCode).toBe(200);
     expect(response.body.success).toBe(true);
     expect(response.body.message).toBe("users fetched successfully" || "No Users Found");
