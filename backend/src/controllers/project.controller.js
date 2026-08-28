@@ -2,18 +2,29 @@ import Project from "../models/project.model.js";
 import User from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
+// Helper function to check if user has senior or admin role
+const isAuthorizedUser = (user) => {
+  return user && (user.role === "senior" || user.role === "admin");
+};
+
+// Helper function to check if user is authorized to access a specific project (owner or admin)
+const isAuthorizedForProject = (project, userId, userRole) => {
+  return project && (project.senior_profile_id.toString() === userId.toString() || userRole === "admin");
+};
+
 const addProject = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id);
-    if(!user || (user.role !== "senior" && user.role !== "admin")) {
+    // Validate user role first using helper function
+    if (!isAuthorizedUser(req.user)) {
       return res.status(403).json({
         success: false,
         message: "Only senior users can add projects",
       });
     }
+
     const file = req.file;
     let result;
-    if (file?.path) { 
+    if (file?.path) {
         const { path } = file;
         result = await uploadOnCloudinary(path);
     }
@@ -34,6 +45,8 @@ const addProject = async (req, res) => {
         message: "Required fields are missing",
       });
     }
+
+    // Create project and update user in parallel where possible
     const project = await Project.create({
       senior_profile_id: req.user._id,
       title,
@@ -46,8 +59,14 @@ const addProject = async (req, res) => {
       duration,
       academic_year,
     });
-    user.projects.push(project._id);
-    await user.save();
+
+    // Update user's projects array
+    await User.findByIdAndUpdate(
+      req.user._id,
+      { $push: { projects: project._id } },
+      { new: true }
+    );
+
     return res.status(201).json({
       success: true,
       message: "Project added successfully",
@@ -61,26 +80,30 @@ const addProject = async (req, res) => {
     });
   }
 };
+
 const updateProject = async (req, res) => {
   try {
-    if (!req.user) { 
+    // Validate user authentication
+    if (!req.user) {
       return res.status(403).json({
         success: false,
-        "message":"Please Login First"
-      })
+        message: "Please Login First"
+      });
     }
+
+    // Validate user role using helper function
+    if (!isAuthorizedUser(req.user)) {
+      return res.status(403).json({
+        success: false,
+        message: "Only senior users and admins can update projects",
+      });
+    }
+
     const { projectId } = req.params;
     if(!projectId ){
       return res.status(400).json({
         success: false,
-        message:"Please gave a valid Project Id"
-      })
-    }
-    const user = req.user;
-    if (!user || (user.role !== "senior" && user.role !== "admin")) {
-      return res.status(403).json({
-        success: false,
-        message: "Junior have no project",
+        message: "Please provide a valid Project Id"
       });
     }
     const {
@@ -95,18 +118,24 @@ const updateProject = async (req, res) => {
       academic_year,
     } = req.body;
 
-    
     const project = await Project.findById(projectId);
-    if (project.senior_profile_id.toString() !== user.id &&
-      user.role !== "admin"
-    ) { 
-      return res.status(400).json({
+    if (!project) {
+      return res.status(404).json({
         success: false,
-        message:"You can't edit this project"
-      })
+        message: "Project not found"
+      });
     }
-    const updateData = {};
 
+    // Check if user is authorized to update this project (owner or admin)
+    if (!isAuthorizedForProject(project, req.user._id, req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        message: "You don't have permission to edit this project"
+      });
+    }
+
+    // Simplified updateData object creation
+    const updateData = {};
     if (title !== undefined) updateData.title = title;
     if (category !== undefined) updateData.category = category;
     if (description !== undefined) updateData.description = description;
@@ -116,111 +145,102 @@ const updateProject = async (req, res) => {
     if (project_image !== undefined) updateData.project_image = project_image;
     if (duration !== undefined) updateData.duration = duration;
     if (academic_year !== undefined) updateData.academic_year = academic_year;
-    const updatedProject= await Project.findByIdAndUpdate(
+
+    const updatedProject = await Project.findByIdAndUpdate(
       projectId,
       { $set: updateData },
-      { returnDocument: "after" },
-    )
-
+      { new: true }
+    );
 
     return res.status(200).json({
       success: true,
       message: "Project updated successfully",
-      project:updatedProject,
+      project: updatedProject,
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Failed to add project",
+      message: "Failed to update project",
       error: error.message,
     });
   }
 };
+
 const deleteProject = async (req, res) => {
   try {
+    // Validate user authentication
     if (!req.user) {
       return res.status(403).json({
         success: false,
         message: "Please Login First",
       });
     }
+
+    // Validate user role using helper function
+    if (!isAuthorizedUser(req.user)) {
+      return res.status(403).json({
+        success: false,
+        message: "Only senior users and admins can delete projects",
+      });
+    }
+
     const { projectId } = req.params;
     if (!projectId) {
       return res.status(400).json({
         success: false,
-        message: "Please gave a valid Project Id",
-      });
-    }
-    const user = req.user;
-    if (!user || (user.role !== "senior" && user.role !== "admin")) {
-      return res.status(403).json({
-        success: false,
-        message: "Junior have no project",
+        message: "Please provide a valid Project Id",
       });
     }
 
-    if (user.role === "admin") { 
-      const project = await Project.findByIdAndDelete(projectId);
-      if (project) {
-        return res.status(200).json({
-          success: true,
-          message: "Project deleted successfully",
-        });
-      }
-      
-      return res.status(200).json({
-        success: true,
-        message: "Gave a valid Project Id",
+    // Admin can delete any project, senior users can only delete their own
+    let project;
+    if (req.user.role === "admin") {
+      project = await Project.findByIdAndDelete(projectId);
+    } else {
+      project = await Project.findOneAndDelete({
+        _id: projectId,
+        senior_profile_id: req.user._id,
       });
-      
     }
-
-    const project = await Project.findOneAndDelete({
-      _id: projectId,
-      senior_profile_id: user.id,
-    });
 
     if (!project) {
-      return res.status(400).json({
-        success: true,
-        message: "you don't have access to do that",
+      return res.status(404).json({
+        success: false,
+        message: "Project not found or you don't have permission to delete it",
       });
     }
-   
+
     return res.status(200).json({
       success: true,
-      message:"Project deleted successfully"
-    })
-    
+      message: "Project deleted successfully"
+    });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Failed to add project",
+      message: "Failed to delete project",
       error: error.message,
     });
   }
 };
+
 async function getAllProjects(req, res) {
   try {
     const { user } = req;
     if (!user) {
-      return res.success(403).json({
+      return res.status(403).json({
         success: false,
         message: "Please Login First",
       });
     }
     const projects = await Project.find({ senior_profile_id: user.id });
-    if (!projects) {
-      return res.status(200).json({
-        success: true,
-        message:"No Project Created Yet"
-      })
-    }
+
+    // Simplified array check
     return res.status(200).json({
       success: true,
-      message: "Projects Fetched Successfully",
-      projects
-    })
+      message: projects.length > 0 ? "Projects Fetched Successfully" : "No Project Created Yet",
+      projects: projects || []
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -229,29 +249,30 @@ async function getAllProjects(req, res) {
     });
   }
 }
+
 async function getProjectById(req, res) {
   try {
     const { user } = req;
     if (!user) {
-      return res.success(403).json({
+      return res.status(403).json({
         success: false,
         message: "Please Login First",
       });
     }
     const { id } = req.params;
     if (!id) {
-      return res.success(400).json({
+      return res.status(400).json({
         success: false,
         message: "Please Provide Project ID",
       });
     }
-    
+
     const project = await Project.findById(id);
-    if (!project) { 
-      return res.status(400).json({
+    if (!project) {
+      return res.status(404).json({
         success: false,
-        message:"Project Not Found"
-      })
+        message: "Project Not Found"
+      });
     }
     return res.status(200).json({
       success: true,
@@ -266,6 +287,7 @@ async function getProjectById(req, res) {
     });
   }
 }
+
 export default {
   addProject,
   updateProject,
